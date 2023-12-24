@@ -1,7 +1,7 @@
 {
-  "name": "nest-typescript-template",
+  "name": "ecommerce-auth-service",
   "version": "0.0.1",
-  "description": "Production ready nest + typescript template",
+  "description": "Auth service of ecommerce microservices application.",
   "author": "Umair Saleem",
   "private": true,
   "license": "UNLICENSED",

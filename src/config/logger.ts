@@ -14,7 +14,7 @@ const customFormat = {
 export const logger = createLogger({
   level: 'info',
   defaultMeta: {
-    application: 'nest + typescript template',
+    application: 'ecommerce-auth-service',
   },
   format: format.combine(
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),

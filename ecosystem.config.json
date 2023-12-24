@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "nest + typescript template",
+      "name": "ecommerce-auth-service",
       "script": "dist/main.js",
       "autorestart": true,
       "watch": false,
