@@ -9,6 +9,8 @@ enum CONFIG {
   NODE_ENV = 'NODE_ENV',
   API_PREFIX = 'API_PREFIX',
   API_DEFAULT_VERSION = 'API_DEFAULT_VERSION',
+  DB_NAME = 'DB_NAME',
+  DB_URI = 'DB_URI',
 }
 
 // Dependency Injection Tokens

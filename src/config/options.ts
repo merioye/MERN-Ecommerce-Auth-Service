@@ -1,8 +1,13 @@
-import { ConfigModuleOptions } from '@nestjs/config';
+import {
+  ConfigModule,
+  ConfigModuleOptions,
+  ConfigService,
+} from '@nestjs/config';
 import { ValidationPipeOptions } from '@nestjs/common';
+import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import Joi from 'joi';
 import * as path from 'path';
-import { ENVIRONMENT } from '../constants';
+import { CONFIG, ENVIRONMENT } from '../constants';
 import { ErrorFormat } from '../types';
 import { RequestValidationError } from '../errors';
 
@@ -16,6 +21,8 @@ const configOptions: ConfigModuleOptions = {
       .required(),
     API_PREFIX: Joi.string().required(),
     API_DEFAULT_VERSION: Joi.string().required(),
+    DB_NAME: Joi.string().required(),
+    DB_URI: Joi.string().required(),
   }),
   validationOptions: {
     abortEarly: true,
@@ -37,4 +44,19 @@ const validationPipeOptions: ValidationPipeOptions = {
   },
 };
 
-export { configOptions, validationPipeOptions };
+const typeOrmModuleOptions: TypeOrmModuleAsyncOptions = {
+  imports: [ConfigModule],
+  useFactory: (configService: ConfigService) => ({
+    type: 'postgres',
+    url: configService.get<string>(CONFIG.DB_URI),
+    database: configService.get<string>(CONFIG.DB_NAME),
+    entities: ['/entities/*.{ts,js}'],
+    migrations: ['/migrations/*.{ts,js}'],
+    subscribers: [],
+    synchronize: false,
+    logging: false,
+  }),
+  inject: [ConfigService],
+};
+
+export { configOptions, validationPipeOptions, typeOrmModuleOptions };
