@@ -5,15 +5,16 @@ import {
 } from '@nestjs/config';
 import { ValidationPipeOptions } from '@nestjs/common';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import Joi from 'joi';
-import * as path from 'path';
+import { join } from 'path';
 import { CONFIG, ENVIRONMENT } from '../constants';
 import { ErrorFormat } from '../types';
 import { RequestValidationError } from '../errors';
 
 const configOptions: ConfigModuleOptions = {
   isGlobal: true,
-  envFilePath: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`),
+  envFilePath: join(__dirname, `../../.env.${process.env.NODE_ENV}`),
   validationSchema: Joi.object({
     PORT: Joi.number().default(5000),
     NODE_ENV: Joi.string()
@@ -44,19 +45,28 @@ const validationPipeOptions: ValidationPipeOptions = {
   },
 };
 
+const dataSourceOptions: PostgresConnectionOptions = {
+  type: 'postgres',
+  entities: [join(__dirname, '../', '**/', '*.entity.{ts,js}')],
+  migrations: [join(__dirname, '../', 'migrations', '*.{ts,js}')],
+  subscribers: [],
+  synchronize: false,
+  logging: false,
+};
+
 const typeOrmModuleOptions: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   useFactory: (configService: ConfigService) => ({
-    type: 'postgres',
+    ...dataSourceOptions,
     url: configService.get<string>(CONFIG.DB_URI),
     database: configService.get<string>(CONFIG.DB_NAME),
-    entities: ['/entities/*.{ts,js}'],
-    migrations: ['/migrations/*.{ts,js}'],
-    subscribers: [],
-    synchronize: false,
-    logging: false,
   }),
   inject: [ConfigService],
 };
 
-export { configOptions, validationPipeOptions, typeOrmModuleOptions };
+export {
+  configOptions,
+  validationPipeOptions,
+  typeOrmModuleOptions,
+  dataSourceOptions,
+};

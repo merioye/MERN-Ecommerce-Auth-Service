@@ -22,7 +22,11 @@
     "test:ci": "jest --ci",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migration:generate": "cross-env NODE_ENV=%npm_config_env% typeorm migration:generate ./src/migrations/%npm_config_name%",
+    "migration:create": "cross-env NODE_ENV=%npm_config_env% typeorm migration:create ./src/migrations/%npm_config_name%",
+    "migration:run": "cross-env NODE_ENV=%npm_config_env% typeorm migration:run -d ./dist/config/data-source.js",
+    "migration:revert": "cross-env NODE_ENV=%npm_config_env% typeorm migration:revert -d ./dist/config/data-source.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.7",
@@ -32,6 +36,7 @@
     "@nestjs/swagger": "^7.1.14",
     "@nestjs/typeorm": "^10.0.2",
     "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
     "helmet": "^7.0.0",
     "joi": "^17.11.0",
     "pg": "^8.11.3",
@@ -55,7 +60,6 @@
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
-    "cross-env": "^7.0.3",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",

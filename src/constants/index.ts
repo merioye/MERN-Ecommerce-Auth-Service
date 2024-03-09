@@ -13,7 +13,19 @@ enum CONFIG {
   DB_URI = 'DB_URI',
 }
 
+enum SIGNUP_METHOD {
+  MANUAL = 'manual',
+  GOOGLE = 'google',
+  FACEBOOK = 'facebook',
+}
+
+enum ROLE {
+  ADMIN = 'admin',
+  SELLER = 'seller',
+  CUSTOMER = 'customer',
+}
+
 // Dependency Injection Tokens
 const LoggerToken = Symbol('LoggerToken');
 
-export { ENVIRONMENT, CONFIG, LoggerToken };
+export { ENVIRONMENT, CONFIG, SIGNUP_METHOD, ROLE, LoggerToken };
