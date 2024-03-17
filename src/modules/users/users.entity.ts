@@ -19,13 +19,13 @@ export class User {
     type: 'varchar',
     length: 20,
   })
-  first_name: string;
+  firstName: string;
 
   @Column({
     type: 'varchar',
     length: 20,
   })
-  last_name: string;
+  lastName: string;
 
   @Column({
     type: 'varchar',
@@ -39,26 +39,26 @@ export class User {
     length: 20,
     default: '',
   })
-  phone_no: string;
+  phoneNo: string;
 
   @Column({
     type: 'text',
     nullable: true,
   })
-  profile_url: string;
+  profileUrl: string;
 
   @Column({
     type: 'text',
     nullable: true,
   })
-  profile_key: string;
+  profileKey: string;
 
   @Column({
     type: 'enum',
     enum: SIGNUP_METHOD,
     default: SIGNUP_METHOD.MANUAL,
   })
-  signup_method: SIGNUP_METHOD;
+  signupMethod: SIGNUP_METHOD;
 
   @Column({
     type: 'enum',
@@ -69,7 +69,7 @@ export class User {
 
   @Column('text')
   @Check(`
-    signup_method != 'manual' OR password IS NOT NULL
+    signupMethod != 'manual' OR password IS NOT NULL
   `)
   password: string;
 
@@ -78,13 +78,13 @@ export class User {
     nullable: true,
   })
   @Check(`
-    (birth_date > '1900-01-01' AND birth_date <= CURRENT_DATE - INTERVAL '10 years')
+    (birthDate > '1900-01-01' AND birthDate <= CURRENT_DATE - INTERVAL '10 years')
   `)
-  birth_date: Date;
+  birthDate: Date;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }

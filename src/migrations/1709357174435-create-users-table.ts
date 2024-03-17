@@ -25,9 +25,9 @@ export class CreateUsersTable1709357174435 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-        DROP TYPE SIGNUP_METHOD;
-        DROP TYPE ROLE;
         DROP TABLE users;
+        DROP TYPE ROLE;
+        DROP TYPE SIGNUP_METHOD;
     `);
   }
 }
