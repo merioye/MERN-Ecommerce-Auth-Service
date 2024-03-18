@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@nestjs/common';
 import { Logger, createLogger, format, transports } from 'winston';
-import { ILogger } from '../../interfaces';
+import { ILogger } from './interfaces';
 import { ENVIRONMENT } from '../../constants';
 
 @Injectable()

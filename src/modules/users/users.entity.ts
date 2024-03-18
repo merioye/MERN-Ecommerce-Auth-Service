@@ -11,7 +11,7 @@ import { ROLE, SIGNUP_METHOD } from '../../constants';
 @Entity({
   name: 'users',
 })
-export class User {
+export class UsersEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

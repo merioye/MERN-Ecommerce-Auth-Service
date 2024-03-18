@@ -10,8 +10,8 @@ import { HttpAdapterHost } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { CONFIG, ENVIRONMENT, LoggerToken } from '../constants';
-import { ILogger } from '../interfaces';
+import { CONFIG, ENVIRONMENT } from '../constants';
+import { ILogger, LoggerToken } from '../modules';
 import { CustomError, RequestValidationError } from '../errors';
 import { LoggerErrorMetadata } from '../types';
 

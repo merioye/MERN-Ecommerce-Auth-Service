@@ -7,7 +7,14 @@ import {
   typeOrmModuleOptions,
   validationPipeOptions,
 } from './config';
-import { GracefulShutdownModule, HealthModule, LoggerModule } from './modules';
+import {
+  GracefulShutdownModule,
+  HealthModule,
+  LoggerModule,
+  AuthModule,
+  UsersModule,
+  HashModule,
+} from './modules';
 import { AllExceptionsFilter } from './filters';
 
 @Module({
@@ -17,6 +24,9 @@ import { AllExceptionsFilter } from './filters';
     LoggerModule,
     GracefulShutdownModule,
     HealthModule,
+    AuthModule,
+    UsersModule,
+    HashModule,
   ],
   providers: [
     { provide: APP_FILTER, useClass: AllExceptionsFilter },

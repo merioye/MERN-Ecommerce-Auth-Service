@@ -6,8 +6,7 @@ import {
   OnApplicationBootstrap,
 } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { LoggerToken } from '../../constants';
-import { ILogger } from '../../interfaces';
+import { LoggerToken, ILogger } from '../logger';
 
 @Injectable()
 export class GracefulShutdownService

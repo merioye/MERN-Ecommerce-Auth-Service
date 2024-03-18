@@ -8,7 +8,7 @@ import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import Joi from 'joi';
 import { join } from 'path';
-import { CONFIG, ENVIRONMENT } from '../constants';
+import { CONFIG, ENVIRONMENT, HASHING_ALGORITHM } from '../constants';
 import { ErrorFormat } from '../types';
 import { RequestValidationError } from '../errors';
 
@@ -24,6 +24,13 @@ const configOptions: ConfigModuleOptions = {
     API_DEFAULT_VERSION: Joi.string().required(),
     DB_NAME: Joi.string().required(),
     DB_URI: Joi.string().required(),
+    HASHING_ALGORITHM: Joi.string()
+      .valid(
+        HASHING_ALGORITHM.SHA256,
+        HASHING_ALGORITHM.SHA384,
+        HASHING_ALGORITHM.SHA512,
+      )
+      .required(),
   }),
   validationOptions: {
     abortEarly: true,

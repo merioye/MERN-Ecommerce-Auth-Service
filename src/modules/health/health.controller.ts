@@ -2,8 +2,7 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import { IHealthService } from './interfaces';
 import { HealthServiceToken } from './constants';
 import { Health } from './types';
-import { LoggerToken } from '../../constants';
-import { ILogger } from '../../interfaces';
+import { LoggerToken, ILogger } from '../logger';
 
 @Controller()
 export class HealthController {

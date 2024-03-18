@@ -12,7 +12,7 @@ export class CustomParseBoolPipe
   extends ParseBoolPipe
   implements PipeTransform
 {
-  async transform(
+  public async transform(
     value: string | boolean,
     metadata: ArgumentMetadata,
   ): Promise<boolean> {

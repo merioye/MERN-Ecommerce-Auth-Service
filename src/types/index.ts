@@ -14,4 +14,10 @@ type LoggerErrorMetadata = {
   method: string;
 };
 
-export { ErrorFormat, LoggerErrorMetadata };
+type ApiResponseParams = {
+  result: unknown;
+  message?: string;
+  statusCode?: number;
+};
+
+export { ErrorFormat, LoggerErrorMetadata, ApiResponseParams };

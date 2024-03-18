@@ -9,7 +9,10 @@ import { ErrorFormat } from '../types';
 
 @Injectable()
 export class CustomParseIntPipe extends ParseIntPipe implements PipeTransform {
-  async transform(value: string, metadata: ArgumentMetadata): Promise<number> {
+  public async transform(
+    value: string,
+    metadata: ArgumentMetadata,
+  ): Promise<number> {
     try {
       return await super.transform(value, metadata);
     } catch (err) {
