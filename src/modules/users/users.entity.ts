@@ -82,6 +82,12 @@ export class User {
   `)
   birthDate: Date;
 
+  @Column({
+    type: 'bool',
+    default: false,
+  })
+  isActivated: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 
