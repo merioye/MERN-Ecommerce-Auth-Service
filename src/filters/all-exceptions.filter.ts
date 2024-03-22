@@ -23,7 +23,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     private readonly configService: ConfigService,
   ) {}
 
-  public catch(exception: HttpException, host: ArgumentsHost): void {
+  public catch(exception: Error, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
 
     const ctx = host.switchToHttp();
@@ -34,7 +34,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const errorId = uuidv4();
     const statusCode =
-      exception?.getStatus() || HttpStatus.INTERNAL_SERVER_ERROR;
+      exception instanceof CustomError ||
+      exception instanceof HttpException ||
+      exception instanceof RequestValidationError
+        ? exception?.getStatus()
+        : HttpStatus.INTERNAL_SERVER_ERROR;
     const message =
       exception instanceof CustomError || !isProduction
         ? exception?.message || 'Internal Server Exception'

@@ -8,29 +8,41 @@ import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import Joi from 'joi';
 import { join } from 'path';
-import { CONFIG, ENVIRONMENT, HASHING_ALGORITHM } from '../constants';
+import {
+  AUTH_TOKEN_ALGORITHM,
+  CONFIG,
+  ENVIRONMENT,
+  HASHING_ALGORITHM,
+} from '../constants';
 import { ErrorFormat } from '../types';
 import { RequestValidationError } from '../errors';
+
+const { DEV, TEST, PROD } = ENVIRONMENT;
+const { SHA256, SHA384, SHA512 } = HASHING_ALGORITHM;
+const { HS256, HS512, RS256, RS512 } = AUTH_TOKEN_ALGORITHM;
 
 const configOptions: ConfigModuleOptions = {
   isGlobal: true,
   envFilePath: join(__dirname, `../../.env.${process.env.NODE_ENV}`),
   validationSchema: Joi.object({
     PORT: Joi.number().default(5000),
-    NODE_ENV: Joi.string()
-      .valid(ENVIRONMENT.DEV, ENVIRONMENT.TEST, ENVIRONMENT.PROD)
-      .required(),
+    NODE_ENV: Joi.string().valid(DEV, TEST, PROD).required(),
     API_PREFIX: Joi.string().required(),
     API_DEFAULT_VERSION: Joi.string().required(),
     DB_NAME: Joi.string().required(),
     DB_URI: Joi.string().required(),
-    HASHING_ALGORITHM: Joi.string()
-      .valid(
-        HASHING_ALGORITHM.SHA256,
-        HASHING_ALGORITHM.SHA384,
-        HASHING_ALGORITHM.SHA512,
-      )
+    HASHING_ALGORITHM: Joi.string().valid(SHA256, SHA384, SHA512).required(),
+    ACCESS_TOKEN_SECRET: Joi.string().required(),
+    REFRESH_TOKEN_SECRET: Joi.string().required(),
+    ACCESS_TOKEN_ALGORITHM: Joi.string()
+      .valid(RS256, RS512, HS256, HS512)
       .required(),
+    REFRESH_TOKEN_ALGORITHM: Joi.string()
+      .valid(RS256, RS512, HS256, HS512)
+      .required(),
+    ACCESS_TOKEN_EXPIRY: Joi.number().required(),
+    REFRESH_TOKEN_EXPIRY: Joi.number().required(),
+    JWT_TOKEN_ISSUER: Joi.string().required(),
   }),
   validationOptions: {
     abortEarly: true,

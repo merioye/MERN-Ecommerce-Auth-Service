@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { IHealthService } from './interfaces';
-import { Health } from './types';
+import { IHealthService } from '../interfaces';
+import { Health } from '../types';
 
 @Injectable()
 export class HealthService implements IHealthService {

@@ -1,6 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import { LoggerToken } from './constants';
-import { WinstonLogger } from './winston.logger';
+import { WinstonLogger } from './loggers';
 
 @Global()
 @Module({

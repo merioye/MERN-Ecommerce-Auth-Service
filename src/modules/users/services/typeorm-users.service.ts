@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Repository, FindOneOptions, FindOptionsWhere } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IUsersService } from './interfaces';
-import { CreateUserAttrs, User } from './types';
-import { UsersEntity } from './users.entity';
+import { IUsersService } from '../interfaces';
+import { CreateUserAttrs, User } from '../types';
+import { UsersEntity } from '../entities';
 
 @Injectable()
 export class TypeOrmUsersService implements IUsersService {

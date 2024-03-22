@@ -1,6 +1,6 @@
 import { FindOneOptions, FindOptionsWhere } from 'typeorm';
 import { CreateUserAttrs, User } from '../types';
-import { UsersEntity } from '../users.entity';
+import { UsersEntity } from '../entities';
 
 export interface IUsersService {
   create(attrs: CreateUserAttrs): Promise<User>;

@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   Check,
 } from 'typeorm';
-import { ROLE, SIGNUP_METHOD } from '../../constants';
+import { ROLE, SIGNUP_METHOD } from '../../../constants';
 
 @Entity({
   name: 'users',

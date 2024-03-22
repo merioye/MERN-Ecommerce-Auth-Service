@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { randomBytes, createHash, scrypt } from 'crypto';
-import { IHashService } from './interfaces';
-import { CONFIG, HASHING_ALGORITHM } from '../../constants';
+import { IHashService } from '../interfaces';
+import { CONFIG, HASHING_ALGORITHM } from '../../../constants';
 
 @Injectable()
 export class CryptoHashService implements IHashService {
